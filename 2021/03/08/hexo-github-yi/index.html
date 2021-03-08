@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="article title, G-Void">
+    <meta name="keywords" content="Hexo+GitHub（一）, G-Void">
     <meta name="description" content="Glitzy-Void的学习博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>article title | G-Void</title>
+    <title>Hexo+GitHub（一） | G-Void</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">article title</h1>
+                    <h1 class="description center-align post-title">Hexo+GitHub（一）</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-05
+                    2021-03-08
                 </div>
                 
 
@@ -467,7 +467,141 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="Hexo-GitHub-博客部署-个人踩坑记录（一）"><a href="#Hexo-GitHub-博客部署-个人踩坑记录（一）" class="headerlink" title="Hexo+GitHub 博客部署 个人踩坑记录（一）"></a>Hexo+GitHub 博客部署 个人踩坑记录（一）</h1><hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>博客的作用</li>
+</ul>
+<p>编程学习本身是持续性的学习行为，说明所学习的内容是在持续地增加。这要求我们要学会阶段性总结自己所学的东西，复习并巩固。所以写文章，尤其写博客文章有助于我们提高自身水平。在博客编写的过程中，我们可以去锻炼自己思考能力、总结能力、文笔组织能力、逻辑思维能力。这属于长期收益行为，短期内无法看到成效的。<br>尤其是文笔能力，在踏入社会进行工作后，公司经常会有周报、技术文档、代码帮助文档之类的文本文档要完成，良好的文笔有利于团队之间的沟通和合作。</p>
+<p>局部知识学完了要去总结，单个知识点学完了要去总结。一个章节学完了要去总结回顾，整体学完了要去整体总结，梳理思路，建构起整体的系统结构。<br>另外，博客可以记录自己经常性和特殊性的代码错误，起到示警作用。</p>
+<p>以上是博客的作用，下面，在经历多种方法对比和选择之后，我决定以 Hexo+GitHub 的方式来进行博客部署。<strong>此文主要内容为我在部署过程中的踩坑记录，并非教程。</strong></p>
+<p>希望能给你带来帮助</p>
+<hr>
+<h2 id="阅读须知"><a href="#阅读须知" class="headerlink" title="阅读须知"></a>阅读须知</h2><blockquote>
+<ul>
+<li>本篇文章是在基于 <a target="_blank" rel="noopener" href="https://sunhwee.com/posts/6e8839eb.html">Hexo+Github博客搭建完全教程 | 洪卫の博客 (sunhwee.com)</a> 此链接的教程进行博客搭建。对于此博文以及下文中所引用的所有连接表示感谢.</li>
+<li>下文主要内容是对于本人在按照教程进行的时候遭遇的相关问题，即踩坑之后个人的解决方法，部分内容会给出相关的引用。</li>
+<li>部署环境(本文撰写时间)：<code>Window 10</code> |<code> git version 2.30.1.windows.1</code>| <code>hexo-cli: 4.2.0</code></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>前置准备：注册<code>GitHub</code>账号、VPN（非必须）</p>
+<ul>
+<li>1.安装<code>Git</code></li>
+<li>2.安装<code>Node.js</code></li>
+<li>3.安装<code>Hexo</code></li>
+<li>4.<code>GitHub</code>创建个人仓库</li>
+<li>5.生成<code>SSH</code>添加到<code>GitHub</code></li>
+<li>6.将<code>hexo</code>部署到<code>GitHub</code></li>
+<li>8.发布文章</li>
+</ul>
+<hr>
+<h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><p>在安装<code>hexo</code>框架时<code>npm</code>指令不成功</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+bash: npm: <span class="token builtin class-name">command</span> not found<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>原因</li>
+</ul>
+<p>搜索浏览后，<a target="_blank" rel="noopener" href="https://blog.csdn.net/p445098355/article/details/104525919">此博文</a> 给出的方案提出是<strong>安装路径配置</strong>和<strong>环境变量</strong>的问题。回溯到上一步，可见教程对于<code>node.js</code>安装时的路径配置时设置为默认的。</p>
+<p>对于此问题，文章中也给出解释说明：</p>
+<blockquote>
+<p>一般情况下，我们安装Node.js环境，程序会自动把NPM全局模块的路径设置在系统盘（通常是C盘下），我们在项目开发阶段不建议全局路径设置在系统盘，不但会影响电脑的性能，而且还很不安全。而且在后期开发过程中需要用到脚手架工具，使用NPM默认安装的路径在C盘，目录层级很深，也没有配置环境变量，所以在运行类似于vue的命令时会出现 “不是内部或外部命令” 的提示 。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/p445098355/article/details/104525919">https://blog.csdn.net/p445098355/article/details/104525919</a></p>
+</blockquote>
+<ul>
+<li>解决方法建议</li>
+</ul>
+<ol>
+<li>重新进行<code>node.js</code> 安装，在安装过程中<strong>自定义路径</strong>。并将所安装的路径记住，在后面的环境变量配置中进行配置.</li>
+<li>修改NPM全局模式的默认安装路径,按照此链接（<a target="_blank" rel="noopener" href="https://blog.csdn.net/p445098355/article/details/104525919">点击这里</a>）说明进行配置。<strong>注意,设置路径为你本地安装的路径。</strong></li>
+</ol>
+<blockquote>
+<p>引用连接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/p445098355/article/details/104525919">修改NPM全局模式的默认安装路径_柯晓楠-CSDN博客_npm 全局安装路径</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jane-panyiyun/p/11882468.html">【hexo+github搭建myblog】bash: npm: command not found 问题，疑似解决！关键词：NPM全局安装路径 - jane_panyiyun - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>添加国内镜像链接，未配置成功</p>
+<p>添加镜像连接时候，注意字母单词的拼写。<code>set</code>和<code>get</code>两者不同：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> config <span class="token builtin class-name">set</span>  registry  http:/<span class="token punctuation">..</span><span class="token punctuation">..</span>.     <span class="token comment">#赋值</span>
+<span class="token function">npm</span> config get  registry  <span class="token comment">#查询</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><p><code>hexo -v</code> 命令不成功</p>
+<pre class="line-numbers language-bath" data-language="bath"><code class="language-bath">hexo -v
+bash: hexo: command not found<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>原因</li>
+</ul>
+<p>和问题一相同，仍然是<strong>环境变量</strong>配置问题。</p>
+<p>此处给出定义：</p>
+<blockquote>
+<p>环境变量是在操作系统中一个具有特定名字的对象，它包含了一个或者多个应用程序所将使用到的信息。例如Windows和DOS操作系统中的path环境变量，当要求系统运行一个程序而没有告诉它程序所在的完整路径时，系统除了在当前目录下面寻找此程序外，还应到path中指定的路径去找。用户通过设置环境变量，来更好的运行进程。<br>环境变量一般是指在操作系统中用来指定操作系统运行环境的一些参数，比如临时文件夹位置和系统文件夹位置等。<br>————————————————</p>
+</blockquote>
+<ul>
+<li>解决方法</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/whjkm/article/details/42675579?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control">hexo博客出现command not found解决方案_Just do it !-CSDN博客</a></p>
+</blockquote>
+<h3 id="问题四"><a href="#问题四" class="headerlink" title="问题四"></a>问题四</h3><p>设置本地GitHub用户名和邮箱，检查时发现输入不符</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"yourname"</span>
+<span class="token function">git</span> config --global user.email <span class="token string">"youremail"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>解决建议</p>
+<ol>
+<li><p>检查在命令输入时 <code>user.name</code>和<code>&quot;yourname&quot;</code>中间是否用空格隔开。（没有用空格隔开是是无效的命令）</p>
+</li>
+<li><p>设置了隐私邮箱，去GitHub上自主修改</p>
+</li>
+</ol>
+<p>  <code>setting-Emails-Keep my email addredd private去掉勾选。</code></p>
+<h3 id="问题五"><a href="#问题五" class="headerlink" title="问题五"></a>问题五</h3><p>创建SSH密钥 具体步骤</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xinxiandong/p/3867505.html">GitHub博客hexo建站之设置SSH 密钥（keys） - xinxiandong - 博客园 (cnblogs.com)</a></p>
+<h3 id="问题六"><a href="#问题六" class="headerlink" title="问题六"></a>问题六</h3><p>教程中 创建<code>ssh</code> ，一路回车。指的是跳过密钥密码设置过程，如果你觉得不安全可以设置密钥。</p>
+<p>如果你像我一样在ssh设置的过程中设置了密钥密码，当出现如下图示</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Enter passphrase <span class="token keyword">for</span> key <span class="token string">'/c/Users/游遥/.ssh/id_rsa'</span><span class="token builtin class-name">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>请将之前设置的密钥密码输入进去即可</p>
+<blockquote>
+<p>参考连接</p>
+<p><a target="_blank" rel="noopener" href="http://www.javashuo.com/article/p-uvtbbqbk-b.html">The authenticity of host ‘github.com (13.229.188.59)’ can’t be established. - JavaShuo</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xinxiandong/p/3867505.html">GitHub博客hexo建站之设置SSH 密钥（keys） - xinxiandong - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<h3 id="问题七"><a href="#问题七" class="headerlink" title="问题七"></a>问题七</h3><p>打开yml文件的方式</p>
+<p>解决方案：用任意编辑器或IDE打开。（不推荐用便签和word）</p>
+<h3 id="问题八"><a href="#问题八" class="headerlink" title="问题八"></a>问题八</h3><p>关联<code>hexo</code>和<code>GitHub</code>，将<code>hexo</code>生成的文章部署到<code>GitHub</code>上。</p>
+<p>此处需要博客yml文件进行配置，在博客根目录下的<code>_config.yml</code>文件，这是博客的配置文件，在这里你可以修改与博客配置相关的各种信息。</p>
+<p>此处注意，GitHub在最近时间将创建仓库的<strong>默认分支名</strong>更改为<code>main</code>,此文教程在Hexo部署到GitHub时 <code>_config.yml</code> 配置时<code>branch</code> 应更改为为<code>main</code></p>
+<p>网上大多数教程大都以<code>master</code>做默认分支，进行<code>hexo d</code> 导致提交时提交至<code>master</code>分支而非<code>main</code>分支。默认分支同时也为活跃分支，分支错误会导致托管在其上的内容未变。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lu_xiuyuan/article/details/112056997">关于hexo更新到GitHub后博客内容未变问题_Lu_xiuyuan的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.toutiaoweb.com/p/1877166.html">gitHub把master分支换成main,你知道了么？ - 【程序员】 (toutiaoweb.com)</a></p>
+</blockquote>
+<h3 id="问题九"><a href="#问题九" class="headerlink" title="问题九"></a>问题九</h3><p>将博客部署上线的主要命令</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo c <span class="token comment"># clean 清除缓存文件</span>
+hexo g <span class="token comment"># generate 生成静态文件</span>
+hexo s <span class="token comment"># server 启动服务器</span>
+<span class="token comment">#访问给予的链接查看 没问题后提交</span>
+hexo d <span class="token comment"># deploy 部署网站</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43740362/article/details/113774088">Hexo、主题、部署上线_MoYu’s Blog-CSDN博客</a></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><blockquote>
+<ul>
+<li>关于维护</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://haoshuai6.github.io/2016-10-28-hexo-github.html">Hexo+Github搭建个人博客两个分支方便维护]</a></p>
+<ul>
+<li>其他参考连接</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42915561/article/details/106725361?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-8&spm=1001.2101.3001.4242">hexo+github搭建个人博客教程和各种坑_cuteerha的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34295316/article/details/89201815">hexo githubpage 初始化 并解决同步静态页面问题_weixin_34295316的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#%E4%B8%8A%E4%BC%A0%E4%B9%8B%E5%89%8D">使用hexo+github搭建免费个人博客详细教程 - 我是小茗同学 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/30dd64d54ed4">【Hexo搭建独立博客全纪录】（一）使用Git和Github - 简书 (jianshu.com)</a></p>
+</blockquote>
+<hr>
+
                 
             </div>
             <hr/>
@@ -493,7 +627,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Glitzy-Void.github.io/2021/03/05/article-title/">http://Glitzy-Void.github.io/2021/03/05/article-title/</a>
+                    <a href="http://Glitzy-Void.github.io/2021/03/08/hexo-github-yi/">http://Glitzy-Void.github.io/2021/03/08/hexo-github-yi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -574,9 +708,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/03/08/hexo-github-yi/">
                     <div class="card-image">
@@ -594,9 +729,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -605,6 +740,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -615,13 +751,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/05/hello-world/">
+                <a href="/2021/03/05/article-title/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="article title">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">article title</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
